@@ -1,22 +1,36 @@
-// Récupération des pièces depuis le fichier JSON
-const reponse = await fetch("data/moovies.json");
-const movies = await reponse.json();
 
-console.log(moovies);
+let movies;
+
+fetch("data/moovies.json")
+    .then((response) => response.json())
+    .then((data) => {
+
+    movies = data;
+    // console.log(movies);
+    afficherFilms(movies);
+
+    })
+    .catch((error) => {
+        console.error(
+            "une erreur s'est produite lors du chargement du fichier JSON :",
+            error
+        );
+    })
 
 
-const imageElement = document.createElement("img");
-imageElement.src = moovies.image;
-const nomElement = document.createElement("h2");
-nomElement.innerText = moovies.nom;
-const prixElement = document.createElement("p");
+// movies.forEach(function(movie) {
+//     console.log(movie);
+// });
 
-const categorieElement = document.createElement("p");
-categorieElement.innerText = moovies.categorie;
 
-const sectionFiches = document.querySelector(".fiches");
-sectionFiches.appendChild(imageElement);
-sectionFiches.appendChild(nomElement);
-sectionFiches.appendChild(prixElement);
-sectionFiches.appendChild(categorieElement);
+
+function afficherFilms(movies){
+
+    movies.forEach(movie => {
+        let li = document.createElement('li');
+        li.classList.add('list-movie-item');
+        li.textContent = movie.Title + movie.Year + movie.Released + movie.Runtime + movie.Genre + movie.Director + movie.Writer + movie.Actors + movie.Plot + movie.Language + movie.Country + movie.Awards + movie.Poster + movie.Metascore + movie.imdbRating + movie.Type + movie.Images; 
+        document.querySelector('.list-movie').appendChild(li);
+    });
+}
 
