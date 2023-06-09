@@ -1,3 +1,4 @@
+
 let movies;
 
 fetch("data/moovies.json")
@@ -32,3 +33,4 @@ function afficherFilms(movies){
         document.querySelector('.list-movie').appendChild(li);
     });
 }
+
